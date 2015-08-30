@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="scom.p.m.a.j.jamps.NuevoPropositoFragment"
+    android:background="#fffcb2ff">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/title_proposito"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal|top"
+        android:textSize="40dp"
+        android:textColor="#ff191cff" />
+
+
+    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
+        android:text="@string/proposito"
+        android:textSize="30sp"
+        android:textColor="#ffff2ddb"
+        android:id="@+id/contenido" />
+</LinearLayout>

@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="scom.p.m.a.j.jamps.NuevoAcercaDeFragment"
+    android:background="#ff28ffb7">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Programadores"
+        android:id="@+id/titulo"
+        android:layout_gravity="center_horizontal|top"
+        android:textSize="40dp"
+        android:textColor="#ff191cff" />
+
+
+    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
+        android:text="@string/acercaDeLaAplicacion"
+        android:textSize="23sp"
+        android:textColor="#ffff2ddb"
+        android:id="@+id/contenido" />
+</LinearLayout>
