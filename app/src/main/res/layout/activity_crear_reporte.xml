@@ -15,12 +15,6 @@
         android:layout_weight="0.8"
         android:orientation="vertical"
         android:weightSum="1">
-        <TextView
-            android:text="@string/title_crear_reporte"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:id="@+id/title" />
 
         <Spinner
             android:layout_width="match_parent"
@@ -40,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editTextComentario"
-            android:text="@string/title_comentario"
+            android:hint="@string/title_comentario"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.1"/>
 
@@ -69,6 +63,7 @@
             android:layout_marginLeft="150dp"
             android:layout_gravity="right"
             android:text="Cancelar"
+            android:onClick="cancelar"
             android:id="@+id/button1" />
 
     </LinearLayout>

@@ -5,13 +5,22 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.parse.FindCallback;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -35,6 +44,7 @@ public class NuevoReporteFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private ListView listView;
+    private ReporteAdapter adapter;
 
 
     /**
@@ -74,19 +84,36 @@ public class NuevoReporteFragment extends Fragment {
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.fragment_nuevo_reporte, container, false);
         reportes =new ArrayList<Reporte>();
-
-        reportes.add(new Reporte("Pelea 1", "direccion de la imagen"));
-        reportes.add(new Reporte("Pelea 2", "direccion de la imagen"));
-        reportes.add(new Reporte("Pelea 3", "direccion de la imagen"));
-        reportes.add(new Reporte("Pelea 4", "direccion de la imagen"));
-        reportes.add(new Reporte("Pelea 5", "direccion de la imagen"));
-        reportes.add(new Reporte("Pelea 6", "direccion de la imagen"));
-        reportes.add(new Reporte("Pelea 7", "direccion de la imagen"));
-
         listView = (ListView) fragmentView.findViewById(R.id.listView);
-
-       ReporteAdapter adapter = new ReporteAdapter(getActivity(), R.layout.reporte, reportes);
+        adapter = new ReporteAdapter(getActivity(), R.layout.reporte, reportes);
         listView.setAdapter(adapter);
+        ParseQuery query = new ParseQuery("Report");
+        query.addDescendingOrder("createdAt");
+        query.findInBackground(new FindCallback<ParseObject>() {
+
+            @Override
+            public void done(List<ParseObject> reports, ParseException e) {
+                if (e == null) {
+                    Log.d("Report", "Recuperados " + reports.size() + " reportes");
+                    for (ParseObject report: reports) {
+                        ParseFile imagen = (ParseFile) report.get("imagen");
+                        adapter.add(new Reporte((String)report.get("comentario"), imagen.getUrl(), (String)report.get("tipo")));
+                        try {
+                            report.pin();
+                        } catch (ParseException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                } else {
+                    Log.e("Report", "Error: " + e.getMessage());
+                    Toast.makeText(getActivity(), "Ocurrio un error al recuperar los reportes, por favor vuelva a intentar",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+
         Button button = (Button) fragmentView.findViewById(R.id.nuevo_reporte);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
@@ -25,10 +27,12 @@ public class ReporteAdapter extends ArrayAdapter<Reporte> {
         Reporte reporte = getItem(position);
 
         TextView textViewTitulo = (TextView)itemView.findViewById(R.id.titulo);
+        TextView textViewTipo = (TextView)itemView.findViewById(R.id.tipo);
+        textViewTipo.setText(reporte.getTipo());
         textViewTitulo.setText (reporte.titulo);
-            ImageView textViewContenido = (ImageView)itemView.findViewById(R.id.imagen);
+        ImageView imageView = (ImageView)itemView.findViewById(R.id.imagen);
         //cargar imagen
-
+        Picasso.with(getContext()).load(reporte.getImagen()).resize(300,300).centerCrop().into(imageView);
         return itemView;
     }
 
