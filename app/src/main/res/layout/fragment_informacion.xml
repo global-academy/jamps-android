@@ -1,14 +1,22 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="scom.p.m.a.j.jamps.InformacionFragment"
-    android:background="#ffc6ffb0">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffc6ffb0"
+    tools:context="scom.p.m.a.j.jamps.InformacionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/informacion"
-        android:layout_gravity="right|top"
-        android:textColor="#ff0b10ff"
-        android:textSize="20dp"
-        android:id="@+id/contenido" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/contenido"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right|top"
+            android:text="@string/informacion"
+            android:textColor="#ff0b10ff"
+            android:textSize="20dp" />
+    </ScrollView>
 
 </FrameLayout>
