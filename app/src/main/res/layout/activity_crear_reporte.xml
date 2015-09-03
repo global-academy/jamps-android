@@ -25,7 +25,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/abc_btn_check_material"
+            android:src="@android:drawable/ic_menu_camera"
             android:id="@+id/imageView"
             android:onClick="clickImagen"
             android:layout_weight="0.5"/>

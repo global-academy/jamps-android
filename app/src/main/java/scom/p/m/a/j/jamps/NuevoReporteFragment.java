@@ -87,32 +87,6 @@ public class NuevoReporteFragment extends Fragment {
         listView = (ListView) fragmentView.findViewById(R.id.listView);
         adapter = new ReporteAdapter(getActivity(), R.layout.reporte, reportes);
         listView.setAdapter(adapter);
-        ParseQuery query = new ParseQuery("Report");
-        query.addDescendingOrder("createdAt");
-        query.findInBackground(new FindCallback<ParseObject>() {
-
-            @Override
-            public void done(List<ParseObject> reports, ParseException e) {
-                if (e == null) {
-                    Log.d("Report", "Recuperados " + reports.size() + " reportes");
-                    for (ParseObject report: reports) {
-                        ParseFile imagen = (ParseFile) report.get("imagen");
-                        adapter.add(new Reporte((String)report.get("comentario"), imagen.getUrl(), (String)report.get("tipo")));
-                        try {
-                            report.pin();
-                        } catch (ParseException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
-                } else {
-                    Log.e("Report", "Error: " + e.getMessage());
-                    Toast.makeText(getActivity(), "Ocurrio un error al recuperar los reportes, por favor vuelva a intentar",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-
-
 
         Button button = (Button) fragmentView.findViewById(R.id.nuevo_reporte);
         button.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +105,33 @@ public class NuevoReporteFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        ParseQuery query = new ParseQuery("Report");
+        query.addDescendingOrder("createdAt");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> reports, ParseException e) {
+                if (e == null) {
+                    adapter.clear();
+                    Log.d("Report", "Recuperados " + reports.size() + " reportes");
+                    for (ParseObject report : reports) {
+                        ParseFile imagen = (ParseFile) report.get("imagen");
+                        adapter.add(new Reporte((String) report.get("comentario"), imagen.getUrl(), (String) report.get("tipo")));
+                        try {
+                            report.pin();
+                        } catch (ParseException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                } else {
+                    Log.e("Report", "Error: " + e.getMessage());
+                    Toast.makeText(getActivity(), "Ocurrio un error al recuperar los reportes, por favor vuelva a intentar", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
